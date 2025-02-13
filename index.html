@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>სიყვარული</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      background: #ff4081;
+      color: #fff;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    #slider {
+      display: none;
+      width: 80%;
+      max-width: 600px;
+      height: 400px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    #slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+    #slider img.active {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="startShow()">თუ გიყვარვარ დააჭირე</button>
+  <div id="slider">
+    <img src="https://i.postimg.cc/sxZHph9H/200w.gif" class="active" alt="ფოტო 1">
+  </div>
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const slider = document.getElementById('slider');
+    const images = slider.getElementsByTagName('img');
+    let current = 0;
+    function startShow() {
+      // ღილაკი გაქრა და სლაიდერი ჩნდება
+      document.querySelector('button').style.display = 'none';
+      slider.style.display = 'block';
+      // მუსიკის დაწყება
+      document.getElementById('bgMusic').play();
+      // სლაიდერის ავტომატური გადარეიკლება
+      setInterval(() => {
+        images[current].classList.remove('active');
+        current = (current + 1) % images.length;
+        images[current].classList.add('active');
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
